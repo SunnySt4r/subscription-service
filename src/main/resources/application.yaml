@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: subscription-service
+  liquibase:
+    change-log: classpath:/db/db-changelog.xml
+  datasource:
+    url: jdbc:postgresql://localhost:15432/database
+    username: user
+    password: password
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+server:
+  address: localhost
+  port: 8080
+
+logging:
+  level:
+    "liquibase": info

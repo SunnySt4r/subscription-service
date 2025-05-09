@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    
+    <property name="uuid_type" value="uuid" dbms="postgresql" />
+    <property name="uuid_function" value="gen_random_uuid()" dbms="postgresql" />
+    <property name="uuid_type" value="varchar(36)" dbms="h2" />
+    <property name="uuid_function" value="random_uuid()" dbms="h2" />
+
+    <changeSet id="2024-05-08-create-subscriptions-table" author="SunnySt4r">
+    <createTable tableName="subscriptions">
+        <column name="id" type="${uuid_type}" defaultValueComputed="${uuid_function}">
+        <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="user_id" type="${uuid_type}">
+        <constraints nullable="false" foreignKeyName="fk_subscriptions_user" referencedTableName="users" referencedColumnNames="id"/>
+        </column>
+        <column name="subscription_type" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+        </column>
+        <column name="active" type="BOOLEAN" defaultValueBoolean="true">
+        <constraints nullable="false"/>
+        </column>
+    </createTable>
+        
+    </changeSet>
+</databaseChangeLog>
